@@ -48,6 +48,7 @@ namespace cg
           double xpos, ypos;
           glfwGetCursorPos(window, &xpos, &ypos);
           std::cout<<"Position: "<<xpos<<" "<<ypos<<std::endl;
+      /*  Deprecated code  
           glClearColor ( 0.0 , 0.1 , 0.1 , 1.0f );
           glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
           glViewport ( 0 , 0 , 1024 , 768 );
@@ -63,6 +64,7 @@ namespace cg
           glColor4f(0.7,0.5,0,1);
           glVertex3f(xpos,ypos,0);
           glEnd();
+      */
           // glfwSwapBuffers(window);
       }
   }
