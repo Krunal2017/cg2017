@@ -6,7 +6,10 @@
 
 #include <iostream>
 
-namespace cg
+// Define a helpful macro for handling offsets into buffer objects
+#define BUFFER_OFFSET( offset )   ((GLvoid*) (offset))
+
+namespace csX75
 {
   //! Initialize GL State
   void initGL(void);
@@ -18,7 +21,7 @@ namespace cg
   //!GLFW keyboard callback
   void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
   //!GLFW mouse click
-  void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+  // void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 };
 
 #endif
