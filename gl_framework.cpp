@@ -1,12 +1,14 @@
 #include "gl_framework.hpp"
+// #include "03_colorcube_rotate.hpp"
+extern GLfloat xrot,yrot,zrot;
 
-namespace cg
+namespace csX75
 {
   //! Initialize GL State
   void initGL(void)
   {
     //Set framebuffer clear color
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     //Set depth buffer furthest depth
     glClearDepth(1.0);
     //Set depth test to less-than
@@ -14,6 +16,7 @@ namespace cg
     //Enable depth testing
     glEnable(GL_DEPTH_TEST);
   }
+  
   
   //!GLFW Error Callback
   void error_callback(int error, const char* description)
@@ -34,41 +37,52 @@ namespace cg
     //!Close the window if the ESC key was pressed
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
       glfwSetWindowShouldClose(window, GL_TRUE);
-
+    else if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+      yrot -= 1.0;
+    else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+      yrot += 1.0;
+    else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+      xrot += 1.0;
+    else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+      xrot += 1.0;
+    else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
+      zrot += 1.0;
+    else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
+      zrot += 1.0;
   }
+      //!GLFW mouse click callback
+  // void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+  // {
+  //   if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT)
+  //       // Delete point
+  //     int a=0;
+  //   else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+  //     glfwGetCursorPos(window, &xpos, &ypos);
+  //     std::cout<<"Position: "<<xpos<<" "<<ypos<<std::endl;
+      
+  //       // popup_menu(); Insert point
+  //         if(count<4){          
+  //           zpos=0.5;
+  //         }else if(count >4 && count<8){
+  //           zpos=-0.5;
+  //           // glDrawArrays(GL_TRIANGLES, 0 ,4);
+  //         }else{
+  //           count=0;
+  //           zpos=0.5;
+  //         }
+  //         positions[count]={ xpos, ypos, zpos, 1};
+  //         // std::cout<<"Position: "<<positions[count][0]<<std::endl;
+  //         csX75::setPoint(positions);
+  //         count++;
+  //         // if(count==8){            
+  //         //   glDrawArrays(GL_TRIANGLES, 0, 8);
+  //         // }
+  //         // else{            
+  //           // glDrawArrays(GL_POINTS, 0, count);
+  //         // }
 
-  //!GLFW mouse click callback
-  void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-  {
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT)
-        // Delete point
-      int a=0;
-    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-        // popup_menu(); Insert point
-          double xpos, ypos;
-          glfwGetCursorPos(window, &xpos, &ypos);
-          std::cout<<"Position: "<<xpos<<" "<<ypos<<std::endl;
-      /*  Deprecated code  
-          glClearColor ( 0.0 , 0.1 , 0.1 , 1.0f );
-          glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-          glViewport ( 0 , 0 , 1024 , 768 );
-          glMatrixMode(GL_PROJECTION);
-          glLoadIdentity();
-          glOrtho( 0 , 1024 , 768 , 0 , 100 , -100 );
-          glMatrixMode(GL_MODELVIEW);
-          glLoadIdentity();
-
-          glPointSize(10);
-          // glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-          glBegin(GL_POINTS);
-          glColor4f(0.7,0.5,0,1);
-          glVertex3f(xpos,ypos,0);
-          glEnd();
-      */
-          // glfwSwapBuffers(window);
-      }
-  }
-
+  //     }
+  // }
 };  
   
 
