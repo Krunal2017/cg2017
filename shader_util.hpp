@@ -10,7 +10,7 @@
 #include <stdexcept>
 
 
-namespace cg
+namespace csX75
 {
   GLuint LoadShaderGL(GLenum eShaderType, const std::string &strFilename);
   GLuint CreateShaderGL(GLenum eShaderType, const std::string &strShaderFile);
