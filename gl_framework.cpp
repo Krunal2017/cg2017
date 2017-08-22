@@ -1,4 +1,5 @@
 #include "gl_framework.hpp"
+#include "cg.h"
 // #include "03_colorcube_rotate.hpp"
 extern GLfloat xrot,yrot,zrot;
 
@@ -49,6 +50,8 @@ namespace csX75
       zrot += 1.0;
     else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
       zrot += 1.0;
+    else if(key == GLFW_KEY_L && action == GLFW_PRESS)
+      cg::loadObject();
   }
       //!GLFW mouse click callback
   // void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
