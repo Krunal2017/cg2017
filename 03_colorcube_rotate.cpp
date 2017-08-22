@@ -14,6 +14,7 @@
 
 
 #include "03_colorcube_rotate.hpp"
+#include "cg.h"
 
 GLuint shaderProgram;
 GLuint vbo, vao;
@@ -209,6 +210,93 @@ void renderGL(void)
   glDrawArrays(GL_TRIANGLES, 0, num_vertices);
   
 }
+
+
+void changeObjects(){
+
+  //Ask GL for a Vertex Attribute Object (vao)
+  // glGenVertexArrays (1, &vao1);
+  // //Set it as the current array to be used by binding it
+  // glBindVertexArray (vao1);
+
+  // //Ask GL for a Vertex Buffer Object (vbo)
+  // glGenBuffers (1, &vbo1);
+  // //Set it as the current buffer to be used by binding it
+  // glBindBuffer (GL_ARRAY_BUFFER, vbo1);
+  //Copy the points into the current buffer
+  glBufferData (GL_ARRAY_BUFFER, sizeof (v_positions) + sizeof(v_colors), NULL, GL_DYNAMIC_DRAW);
+  glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(v_positions), v_positions );
+  glBufferSubData( GL_ARRAY_BUFFER, sizeof(v_positions), sizeof(v_colors), v_colors );
+
+  // std::string vertex_shader_file("03_vshader.glsl");
+  // std::string fragment_shader_file("03_fshader.glsl");
+  // std::vector<GLuint> shaderList;
+  // shaderList.push_back(csX75::LoadShaderGL(GL_VERTEX_SHADER, vertex_shader_file));
+  // shaderList.push_back(csX75::LoadShaderGL(GL_FRAGMENT_SHADER, fragment_shader_file));
+
+  // shaderProgram = csX75::CreateProgramGL(shaderList);
+  // glUseProgram( shaderProgram );
+
+  // set up vertex arrays
+  // GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
+  // glEnableVertexAttribArray( vPosition );
+  // glVertexAttribPointer( vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0) );
+  
+  // GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
+  // glEnableVertexAttribArray( vColor );
+  // glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(v_positions)) );
+
+  // uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+}
+
+namespace cg{
+void loadObject(){
+  char file_name[100];
+  std::cout<<"Enter file to be loaded: ";
+  std::cin>>file_name;
+
+  // quad( 9, 8, 11, 10);
+  
+  FILE *fp;
+       int i;
+  float x,y,z,h;
+   
+      /* open the file */
+      fp = fopen(file_name, "r");
+      if (fp == NULL) {
+         printf("I couldn't open file for reading.\n");
+         exit(0);
+      }
+   for(i=0;i<16;i++)
+    positions[i]=glm::vec4(0.0, 0.0, 0.0, 0.0);
+  i=0;
+      while (fscanf(fp, "%f,%f,%f,%f\n", &x, &y, &z, &h) == 4){
+         // printf("x: %f, y: %f\n", x, y);
+          positions[i]=glm::vec4(x, y, z, h);
+          i++;
+        }
+      /* close the file */
+      fclose(fp);
+      tri_idx=0;
+// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+colorcube();
+    // quad( 1, 0, 3, 2 );
+    // quad( 2, 3, 7, 6 );
+    // quad( 3, 0, 4, 7 );
+    // quad( 6, 5, 1, 2 );
+    // quad( 4, 5, 6, 7 );
+    // quad( 5, 4, 0, 1 );
+    // initBuffersGL();
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    changeObjects();
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+// glDrawArrays(GL_TRIANGLES, 0, num_vertices);
+// glfwSwapBuffers(window);
+    renderGL();
+   
+}
+}
+
 
 int main(int argc, char** argv)
 {
